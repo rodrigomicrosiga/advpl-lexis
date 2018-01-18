@@ -2,10 +2,11 @@
 grammar AdvplExpr;
 import AdvplCommonLexerRules;
 
-prog            :   (preproc|NEWLINE)* ;
+@header {package io.fulgur.advpl.advpl_lexis.antlr;}
 
-preproc         :   (onlypreproc|singlepreproc|doublepreproc|srcstaticvar) ;
-onlypreproc     :   PREPROC (NEWLINE|EOF) ;
-singlepreproc   :   PREPROC (NUMERIC|STRING|BOOLEAN|NULL|IDENTIFIER) (NEWLINE|EOF) ;
-doublepreproc   :   PREPROC IDENTIFIER (NUMERIC|STRING|BOOLEAN|NULL|IDENTIFIER) (NEWLINE|EOF) ;
-srcstaticvar    :   STATIC IDENTIFIER (OP_ATTRIB (NUMERIC|STRING|BOOLEAN|NULL|IDENTIFIER))? (NEWLINE|EOF) ;
+prog            :   (preproc)* ;
+
+preproc         :   (onlypreproc|singlepreproc|doublepreproc) (NEWLINE|EOF) ;
+onlypreproc     :   PREPROC ;
+singlepreproc   :   PREPROC CONST ;
+doublepreproc   :   PREPROC ID CONST ;

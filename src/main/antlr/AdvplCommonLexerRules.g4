@@ -30,11 +30,13 @@ fragment Z  : ('z'|'Z') ;
 fragment SS : '\'' (  ~('\''|'\n') )* '\'' ;
 fragment DS : '"' ( ~('"'|'\n') )* '"'? ;
 
+CONST       : (NUMERIC|STRING|BOOLEAN|NULL) ;
+
 NUMERIC     : '-'? [0-9]+ ('.' [0-9]+)? ;
-STRING      : (SS|DS) ;
+STRING      : SS | DS ;
 BOOLEAN     : '.' (T|F) '.' ;
 NULL        : N I L ;
-PREPROC     : '#' IDENTIFIER ;
+PREPROC     : '#' ID ;
 NEWLINE     : '\r'? '\n' ;
 WS          : [ \t]+ -> skip ;
 
@@ -42,4 +44,4 @@ OP_ATTRIB   : ':=' ;
 
 STATIC      : S T A T I C ;
 
-IDENTIFIER  : [a-zA-Z_0-9]+ ;
+ID          : [a-zA-Z_0-9]+ ;
